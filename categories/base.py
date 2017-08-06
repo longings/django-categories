@@ -67,7 +67,10 @@ class CategoryBase(MPTTModel):
 
     def __str__(self):
         ancestors = self.get_ancestors()
-        return ' > '.join([force_text(i.name) for i in ancestors] + [self.name, ])
+        if ancestors:
+            return ' > '.join([force_text(i.name) for i in ancestors] + [self.name, ])
+        else:
+            return '%s' % self.name
 
     class Meta:
         abstract = True
